@@ -189,4 +189,4 @@ We are going to enable Hyper-V via PowerShell in the newly created VM.
     > If you are not promoted to restart the VM within PowerShell. Please close the Bastion Host tab, and return to the Azure Portal, and select your VM. At this point you can either "restart your VM" and reconnect via Bastion. OR you can *STOP* the VM and *Start* the VM again.
 
 
-Go to   [Next Step](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-howto-setup-machine)
+Go to [Next Step](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-howto-setup-machine)
