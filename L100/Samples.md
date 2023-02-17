@@ -27,9 +27,6 @@ This page provides a resource guide for new users to learn and start working wit
 
 
 
-<br>
-
-
 
 
 
