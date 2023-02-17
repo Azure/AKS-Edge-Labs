@@ -4,9 +4,10 @@ This page provides a resource guide for new users to learn and start working wit
 
 <br>
 
-1. Try out AKS Edge Essentials yourself on an Azure VM – through these [hands-on instructions](https://github.com/mitkox/AKS-Edge/tree/main/hands-on), you can go through installing, connecting to Arc, and interoperability.
 
-2. Go through [hands on lab](./Documentation/SetUp_Environment.md) for a comprehensive Overview of AKS Edge Essentials and its requirements, as well as a quickstart guide for using the bits.
+1. Try out AKS Edge Essentials yourself on an Azure VM – through these [hands-on instructions](./Documentation/SetUp_Environment.md), you can go through installing, connecting to Arc, and interoperability.
+
+2. Go through [aka.ms/AKSEdge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview) for a comprehensive Overview of AKS Edge Essentials and its requirements, as well as a quickstart guide for using the bits.
 
 3.  [Azure Arc Jumpstart](https://azurearcjumpstart.io/)
   enables users to bring Azure security and cloud-native services to hybrid, multicloud, and edge environments. Through the Jumpstart overview, develop a high-level understanding of Azure Arc and its scenarios.  
