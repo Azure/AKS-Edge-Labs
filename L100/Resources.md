@@ -26,9 +26,9 @@ This page provides a resource guide for new users to learn and start working wit
 
         [![IMAGE_ALT](https://img.youtube.com/vi/87u7P-JXZcA/0.jpg)](https://www.youtube.com/watch?v=87u7P-JXZcA) 
 
+    3. AKS Edge Essentials storage architecture
 
 
-
-
+       [![IMAGE_ALT](https://img.youtube.com/vi/v4mlvxKoiOM/0.jpg)](https://youtu.be/v4mlvxKoiOM) 
 
   
