@@ -15,20 +15,31 @@ This page provides a resource guide for new users to learn and start working wit
   <center><img src="./Images/Jumpstart.png" height="300"/></center>
 
 4. Watch the Arc Jumpstart AKS Edge Essentials video series for deep dives and demos.
-    1. Supermarket demo with Arc and GitOps
+
+    1. AKS Edge Essentials architecture and use-cases
+
+
+        [![IMAGE_ALT](https://img.youtube.com/vi/cx-KNd2Dkis/0.jpg)](https://www.youtube.com/watch?v=cx-KNd2Dkis) 
+
+    2. Supermarket demo with Arc and GitOps
 
 
         [![IMAGE_ALT](https://img.youtube.com/vi/NoIMUd0Gemw/0.jpg)](https://www.youtube.com/watch?v=NoIMUd0Gemw) 
 
-    2. AKS Edge Essentials network architecture
+    3. AKS Edge Essentials network architecture
 
 
 
         [![IMAGE_ALT](https://img.youtube.com/vi/87u7P-JXZcA/0.jpg)](https://www.youtube.com/watch?v=87u7P-JXZcA) 
 
-    3. AKS Edge Essentials storage architecture
+    4. AKS Edge Essentials storage architecture
 
 
        [![IMAGE_ALT](https://img.youtube.com/vi/v4mlvxKoiOM/0.jpg)](https://youtu.be/v4mlvxKoiOM) 
+
+    5. AKS Edge Essentials scheme and Azure Arc
+
+
+       [![IMAGE_ALT](https://img.youtube.com/vi/50qXXIWBNEQ/0.jpg)](https://www.youtube.com/watch?v=50qXXIWBNEQ&t=924s) 
 
   
