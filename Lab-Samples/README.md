@@ -1,0 +1,1 @@
+This repo contains samples to help customers get started with AKS Edge Essentials. Many of these samples demonstrate end-to-end scenarios. For more information on AKS Edge Essentials, please visit the [AKS EE documentation](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview).
