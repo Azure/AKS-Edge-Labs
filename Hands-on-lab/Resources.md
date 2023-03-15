@@ -5,17 +5,16 @@ This page provides a resource guide for new users to learn and start working wit
 <br>
 
 
-1. Try out AKS Edge Essentials yourself on an Azure VM – through these [hands-on instructions](./Documentation/SetUp_Environment.md), you can go through installing, connecting to Arc, and interoperability.
+1. Try out AKS Edge Essentials yourself on an Azure VM to test applications off premises– through these [hands-on instructions](./Documentation/SetUp_Environment.md), you can go through installing, single machine deployment, application deployment, and connecting to Arc. 
 
-2. Go through [aka.ms/AKSEdge](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview) for a comprehensive Overview of AKS Edge Essentials and its requirements, as well as a quickstart guide for using the bits.
+2. Go through our [AKS Edge Essentials docs](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-overview) for a comprehensive Overview of AKS Edge Essentials and its requirements, as well as a quickstart guide on how to set up an AKS Edge Essentials single-machine K3S cluster.
 
 3.  [Azure Arc Jumpstart](https://azurearcjumpstart.io/)
   enables users to bring Azure security and cloud-native services to hybrid, multicloud, and edge environments. Through the Jumpstart overview, develop a high-level understanding of Azure Arc and its scenarios.  
 
   <center><img src="./Images/Jumpstart.png" height="300"/></center>
 
-5. Watch the Arc Jumpstart AKS Edge Essentials video series for deep dives and demos.
-  
+4. Watch the Arc Jumpstart AKS Edge Essentials video series for deep dives and demos.
 
     1. AKS Edge Essentials architecture and use-cases
 
@@ -43,13 +42,4 @@ This page provides a resource guide for new users to learn and start working wit
 
        [![IMAGE_ALT](https://img.youtube.com/vi/50qXXIWBNEQ/0.jpg)](https://www.youtube.com/watch?v=50qXXIWBNEQ&t=924s) 
 
-6. Lior Kamrat joins Scott Hanselman to show how you can also deploy it on Windows IoT operating system.
-    
-    - AKS Edeg Essentials is now available as a manged service not just in Azure but also in the edge. 
-
-         [![IMAGE_ALT](https://img.youtube.com/vi/DOazcaqf5Ec/0.jpg)](https://www.youtube.com/watch?v=DOazcaqf5Ec) 
-
-       
-
-
-
+  
