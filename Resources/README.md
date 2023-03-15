@@ -1,0 +1,1 @@
+This folder provides a resource guide for new users to learn and start working with AKS Edge Essentials. Through demos, hands-on labs, and other collateral that come from a variety of sources, users can gain a comprehensive end-to-end understanding of AKS Edge Essentials. 
