@@ -42,4 +42,13 @@ This page provides a resource guide for new users to learn and start working wit
 
        [![IMAGE_ALT](https://img.youtube.com/vi/50qXXIWBNEQ/0.jpg)](https://www.youtube.com/watch?v=50qXXIWBNEQ&t=924s) 
 
-  
+6. Lior Kamrat joins Scott Hanselman to show how you can also deploy it on Windows IoT operating system. 
+
+     
+
+    - AKS Edge Essentials is now available as a manged service not just in Azure but also in the edge.  
+
+ 
+ 
+
+         [![IMAGE_ALT](https://img.youtube.com/vi/DOazcaqf5Ec/0.jpg)](https://www.youtube.com/watch?v=DOazcaqf5Ec)  
