@@ -9,7 +9,7 @@ This repository is offered for training programs oriented to accelerate time-to-
 - AKS Edge Essentials Overview: https://aka.ms/aks-edge/overview
 - AKS Edge Essentials Quickstart: https://aka.ms/aks-edge/quickstart
 - AKS Edge Essentials Release Notes: https://aka.ms/aks-edge/releases
-- AKS Esge Essentials PowerShell Reference: https://aka.ms/aks-edge/reference
+- AKS Edge Essentials PowerShell Reference: https://aka.ms/aks-edge/reference
 
 ## Contributing
 
