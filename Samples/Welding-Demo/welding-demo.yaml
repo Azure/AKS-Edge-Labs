@@ -1,0 +1,369 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rtspsim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rtspsim
+  template:
+    metadata:
+      labels:
+        app: rtspsim
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node2-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: rtspsim
+        image: aksedgesamplesregistry.azurecr.io/weldingrtspsim:latest
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 8554
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtspsim-svc
+spec:
+  selector:
+    app: rtspsim
+  ports:
+  - port: 8554
+    targetPort: 8554
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqttbroker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqttbroker
+  template:
+    metadata:
+      labels:
+        app: mqttbroker
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node2-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: mqttbroker
+        image: eclipse-mosquitto:1.6
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 1883
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqttbroker-int-svc
+spec:
+  selector:
+    app: mqttbroker
+  ports:
+  - port: 1883
+    targetPort: 1883
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node2-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: influxdb
+        image: influxdb:1.8.10
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 8086
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-int-svc
+spec:
+  selector:
+    app: influxdb
+  ports:
+  - port: 8086
+    targetPort: 8086
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opcua
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opcua
+  template:
+    metadata:
+      labels:
+        app: opcua
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node2-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: opcua
+        image: aksedgesamplesregistry.azurecr.io/weldingopcua:latest
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        ports:
+        - containerPort: 4840
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opcua-int-svc
+spec:
+  selector:
+    app: opcua
+  ports:
+  - port: 4840
+    targetPort: 4840
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pipeline
+  template:
+    metadata:
+      labels:
+        app: pipeline
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node2-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: pipeline
+        image: aksedgesamplesregistry.azurecr.io/weldingpipeline:latest
+        env:
+        - name: DEVICE
+          value: CPU
+        - name: INPUT
+          value: rtsp://rtspsim-svc:8554/input.mp4
+        - name: MQTT_IP
+          value: mqttbroker-int-svc
+        - name: OPCUA_IP
+          value: opcua-int-svc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegraf
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node1-ledge
+            - weight: 2
+              preference:
+                matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - aksee-node3-ledge
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 15
+      containers:
+      - name: telegraf
+        image: aksedgesamplesregistry.azurecr.io/weldingtelegraf:latest
+        env:
+        - name: MQTT_IP
+          value: mqttbroker-int-svc
+        - name: INFLUX_SVC
+          value: influxdb-svc
+        ports:
+        - containerPort: 5100
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: influxdb
+  ports:
+  - port: 8086
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telegraf-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: telegraf
+  ports:
+  - port: 5100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opcua-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: opcua
+  ports:
+  - port: 4840
