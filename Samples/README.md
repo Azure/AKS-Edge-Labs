@@ -24,6 +24,11 @@ The interop samples demonstrate usage patterns for interoperatibility between Mi
 |----------------|------------------|
 | [Welding-Demo](./Welding-Demo/) | Edge AI & Industrial IoT sample demonstrating computer vision, AI weld porosity inferencing and OPC UA messaging using a 3-node cluster with AKS EE (highly available), and a Grafana dashboard. | 
 
+## Other Samples
+
+| Name           | Description      |
+|----------------|------------------|
+| [WebAssmebly](./WebAssembly/) | Script to enable WebAssembly workloads with AKS Edge Essentials and **runwasi containerd-shim**. Also, provides a sample deployment WASKM workload.  | 
 
 ### Using the samples
 
