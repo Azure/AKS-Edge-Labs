@@ -13,11 +13,11 @@
     Bool
 
 .PARAMETER clean
-    Input parameter to clean previous Welding Demo deployment
+    Switch parameter to clean previous Welding Demo deployment
 
 #>
 param (
-    [bool] $clean
+    [Switch] $clean
 )
 
 Write-Host "1. Starting Welding Demo configuration" -ForegroundColor Green
@@ -33,7 +33,7 @@ Write-Host "3. Restarting Grafana service" -ForegroundColor Green
 Restart-Service -Name Grafana
 Set-Location $origPath
 
-if($clean)
+if($clean.IsPresent)
 {
     Write-Host "4. Cleaning previous deployments" -ForegroundColor Green
     kubectl delete -f .\welding-demo.yaml
