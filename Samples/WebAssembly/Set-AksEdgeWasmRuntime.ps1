@@ -12,7 +12,7 @@
         containerd-wasm-shim version. For more information, see https://github.com/deislabs/containerd-wasm-shims
 
     .PARAMETER shimOption
-        WASM Engine shim: Spin, Slight, or both. For more information, see https://github.com/deislabs/containerd-wasm-shims
+        WASM Engine shim: Spin, Slight, Lunatic, or WWS. For more information, see https://github.com/deislabs/containerd-wasm-shims
 
     .EXAMPLE
         Set-AksEdgeWasmRuntime -enable
@@ -23,9 +23,9 @@
 
 param(
     [Switch] $enable,
-    [string] $shimVersion = "v0.4.0",
-    [ValidateSet("spin", "slight", "both")]
-    [string] $shimOption = "both"
+    [string] $shimVersion = "v0.9.2",
+    [ValidateSet("spin", "slight", "lunatic", "wws")]
+    [string] $shimOption = "slight"
 )
 
 Write-Host "1. Checking AKS Edge Essentials dependencies" -ForegroundColor Green
@@ -54,21 +54,13 @@ else
 
 if ($enable.IsPresent)
 {
-    Write-Host "2. Downloading shim verison $shimVersion" -ForegroundColor green
-    Invoke-AksEdgeNodeCommand "wget -O /home/aksedge-user/containerd-wasm-shim.tar.gz https://github.com/deislabs/containerd-wasm-shims/releases/download/$shimVersion/containerd-wasm-shims-v1-linux-x86_64.tar.gz"
+    Write-Host "2. Downloading shim verison $shimVersion - $shimOption" -ForegroundColor green
+    Invoke-AksEdgeNodeCommand "wget -O /home/aksedge-user/containerd-wasm-shim.tar.gz https://github.com/deislabs/containerd-wasm-shims/releases/download/$shimVersion/containerd-wasm-shims-v1-$shimOption-linux-aarch64.tar.gz"
 
     Write-Host "3. Unpacking and moving shim to appropiate folder" -ForegroundColor green
     Invoke-AksEdgeNodeCommand "tar -xvf /home/aksedge-user/containerd-wasm-shim.tar.gz && sudo mkdir /var/lib/bin" -ignoreError | Out-Null
-
-    if($shimOption -eq "both")
-    {
-        Invoke-AksEdgeNodeCommand "sudo mv /home/aksedge-user/containerd-shim-spin-v1 /var/lib/bin/ && sudo mv /home/aksedge-user/containerd-shim-slight-v1 /var/lib/bin/ && sudo rm /home/aksedge-user/containerd-*"  | Out-Null
-    }
-    else
-    {
-        Invoke-AksEdgeNodeCommand "sudo mv /home/aksedge-user/containerd-shim-$shimOption-v1 /var/lib/bin/ && sudo rm /home/aksedge-user/containerd-*"  | Out-Null
-    }
-
+    Invoke-AksEdgeNodeCommand "sudo mv /home/aksedge-user/containerd-shim-$shimOption-v1 /var/lib/bin/ && sudo rm /home/aksedge-user/containerd-*"  | Out-Null
+    
     Write-Host "4. Copying required files" -ForegroundColor green
     if($IsK8s)
     {
@@ -83,25 +75,9 @@ if ($enable.IsPresent)
     Copy-AksEdgeNodeFile -NodeType Linux -FromFile "/home/aksedge-user/config.toml" -ToFile ".\config.toml"
 
     Write-Host "5. Configuring containerd config files to support runwasi runtime" -ForegroundColor green
-    if($shimOption -eq "both")
-    {
-        $command = "`n[plugins.cri.containerd.runtimes.spin]`n  runtime_type = ""io.containerd.spin.v1""`n[plugins.cri.containerd.runtimes.slight]`n  runtime_type = ""io.containerd.slight.v1"""
-        if($IsK8s)
-        {
-            $command =  "`n[plugins.""io.containerd.grpc.v1.cri"".containerd.runtimes.slight]`n  runtime_type = ""io.containerd.slight.v1""`n[plugins.""io.containerd.grpc.v1.cri"".containerd.runtimes.spin]`n  runtime_type = ""io.containerd.spin.v1"""
-        }
-        Add-Content -Path ".\config.toml" $command     
-    }
-    else
-    {
-        $command = "`n[plugins.cri.containerd.runtimes.$shimOption]`n  runtime_type = ""io.containerd.$shimOption.v1"""
-        if($IsK8s)
-        {
-            $command =  "`n[plugins.""io.containerd.grpc.v1.cri"".containerd.runtimes.$shimOption]`n  runtime_type = ""io.containerd.$shimOption.v1"""
-        }
-        Add-Content -Path ".\config.toml" $command  
-    }
-
+    $command =  "`n[plugins.""io.containerd.grpc.v1.cri"".containerd.runtimes.$shimOption]`n  runtime_type = ""io.containerd.$shimOption.v1"""  
+    Add-Content -Path ".\config.toml" $command  
+    
     Copy-AksEdgeNodeFile -NodeType Linux -FromFile ".\config.toml" -ToFile "/home/aksedge-user/config.toml" -PushFile
     if($IsK8s)
     {
@@ -112,7 +88,7 @@ if ($enable.IsPresent)
         Invoke-AksEdgeNodeCommand -NodeType Linux "sudo cp /home/aksedge-user/config.toml /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl"
     }
 
-    Write-Host "6. Cleaning unnecessary files" -ForegroundColor green
+    Write-Host "6. Cleaning existing configsu files" -ForegroundColor green
     Invoke-AksEdgeNodeCommand -NodeType Linux "sudo rm /home/aksedge-user/config.toml"
     Remove-Item -Path ".\config.toml"
 
@@ -148,40 +124,17 @@ if ($enable.IsPresent)
 else
 {
     Write-Host "2. Remvoving shims from /var/lib/bin folder" -ForegroundColor green
-    if($shimOption -eq "both")
-    {
-        Invoke-AksEdgeNodeCommand "sudo rm /var/lib/bin/containerd-shim-spin-v1 && sudo rm /var/lib/bin/containerd-shim-slight-v1" -ignoreError | Out-Null
-    }
-    else
-    {
-        Invoke-AksEdgeNodeCommand "sudo rm /var/lib/bin/containerd-shim-$shimOption-v1" -ignoreError  | Out-Null
-    }
+    Invoke-AksEdgeNodeCommand "sudo rm /var/lib/bin/containerd-shim-$shimOption-v1" -ignoreError  | Out-Null
 
     Write-Host "3. Removing containerd config files to support runwasi runtime" -ForegroundColor green
-    if($shimOption -eq "both")
+    if($IsK8s)
     {
-        if($IsK8s)
-        {
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/spin/,+1d' /etc/containerd/config.toml" | Out-Null
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/slight/,+1d' /etc/containerd/config.toml" | Out-Null
-        }
-        else
-        {
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/spin/,+1d' /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl" | Out-Null
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/slight/,+1d' /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl" | Out-Null
-        }    
+        Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/${shimOption}/,+1d' /etc/containerd/config.toml" | Out-Null
     }
     else
     {
-        if($IsK8s)
-        {
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/${shimOption}/,+1d' /etc/containerd/config.toml" | Out-Null
-        }
-        else
-        {
-            Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/${shimOption}/,+1d' /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl" | Out-Null
-        }  
-    }
+        Invoke-AksEdgeNodeCommand -NodeType "Linux" -command "sudo sed -i -e '/${shimOption}/,+1d' /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl" | Out-Null
+    }  
 
     $kubeService = "k3s"
     if($IsK8s)

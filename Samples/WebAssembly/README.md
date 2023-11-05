@@ -17,9 +17,9 @@ Check [AKS Edge Essentials requirements and support matrix](https://learn.micros
 1. Deploy a [Single Machine cluster](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-single-node-deployment) or a [Scalable Cluster](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-multi-node-deployment).
 1. Open an elevated PowerShell session
 1. Move to an appropriate working directory
-1. Download [Set-AksEdgeWasmRuntime.ps1](./Set-AksEdgeWasmRuntimes.ps1)
+1. Download [Set-AksEdgeWasmRuntime.ps1](./Set-AksEdgeWasmRuntime.ps1)
     ```powershell
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Azure/AKS-Edge/preview/samples/wasm/Set-AksEdgeWasmRuntime.ps1" -OutFile ".\Set-AksEdgeWasmRuntime.ps1"
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Azure/AKS-Edge-Labs/main/Samples/WebAssembly/Set-AksEdgeWasmRuntime.ps1" -OutFile ".\Set-AksEdgeWasmRuntime.ps1"
     Unblock-File -Path ".\Set-AksEdgeWasmRuntime.ps1"
     Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
     ```
@@ -32,22 +32,25 @@ Check [AKS Edge Essentials requirements and support matrix](https://learn.micros
    | Parameter | Options | Description | 
    | --------- | ------- | ----------- |
    | enable | None | If this flag is present, the command enables the feature.|
-   | shimOption | spin, slight, both | containerd-wasm-shim version. For more information, see https://github.com/deislabs/containerd-wasm-shims |
+   | shimOption | spin, slight, lunatic, wws | containerd-wasm-shim version. For more information, see https://github.com/deislabs/containerd-wasm-shims |
    | shimVersion | None | containerd-wasm-shim version. For more information, see https://github.com/deislabs/containerd-wasm-shims |
     
 
 5. Apply the *runtime.yaml* to create the *wasmtime-slight* and *wasmtime-spin* rumtime classes.
 
     ```powershell
-    kubectl apply -f https://github.com/deislabs/containerd-wasm-shims/releases/download/v0.4.0/runtime.yaml
+    kubectl apply -f https://github.com/deislabs/containerd-wasm-shims/releases/download/v0.9.2/runtime.yaml
     ```
     
     If everything was correctly created, you should see the two runtime classes.
 
     ```bash
-    NAME              HANDLER   AGE
-    wasmtime-slight   slight    5s
-    wasmtime-spin     spin      5s
+    PS C:\Users\Aks-Edge> kubectl get runtimeclass
+    NAME               HANDLER   AGE
+    wasmtime-lunatic   lunatic   44s
+    wasmtime-slight    slight    44s
+    wasmtime-spin      spin      44s
+    wasmtime-wws       wws       44s
     ```
 
 6. Deploy Wasm workloads to your cluster using the *wasmtime-spin* and *wasmtime-slight* runtime classes deployed in the previous step.
