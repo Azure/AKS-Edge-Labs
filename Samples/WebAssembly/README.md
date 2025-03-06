@@ -9,12 +9,12 @@ This sample demonstrates how to run a WebAssembly (WASM) payload using [containe
 
 ## Prerequisites
 
-Check [AKS Edge Essentials requirements and support matrix](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-system-requirements).
+Check [AKS Edge Essentials requirements and support matrix](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-system-requirements).
 
 ## Instructions
 
 1. Setup AKS Edge Essentials - Follow [Set up machine](https://aka.ms/aks-edge/quickstart)
-1. Deploy a [Single Machine cluster](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-single-node-deployment) or a [Scalable Cluster](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-multi-node-deployment).
+1. Deploy a [Single Machine cluster](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-howto-single-node-deployment) or a [Scalable Cluster](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-howto-multi-node-deployment).
 1. Open an elevated PowerShell session
 1. Move to an appropriate working directory
 1. Download [Set-AksEdgeWasmRuntime.ps1](./Set-AksEdgeWasmRuntimes.ps1)

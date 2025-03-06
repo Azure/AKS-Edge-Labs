@@ -10,10 +10,10 @@
 # Step 1: Setup AKS Edge Essentials
 
 * **To create a AKS Edge single-node deployment**  
- Complete the steps described in [Prepare your machines for AKS Edge Essentials](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-setup-machine) and [Single machine deployment](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-howto-single-node-deployment) guides.
+ Complete the steps described in [Prepare your machines for AKS Edge Essentials](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-howto-setup-machine) and [Single machine deployment](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-howto-single-node-deployment) guides.
  
 * **To learn more about AKS Edge Essentials**  
- For more information, review [AKS Edge Essentials docs](https://learn.microsoft.com/azure/aks/hybrid/aks-edge-overview).
+ For more information, review [AKS Edge Essentials docs](https://learn.microsoft.com/azure/aks/aksarc/aks-edge-overview).
  
 
  Go to [Next Step](./Develop%20and%20publish%20the%20Linux%20container.MD)  

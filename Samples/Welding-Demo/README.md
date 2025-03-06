@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. Three edge machines, each with the required OS and AKS Edge Essentials installed. Follow the **Prerequisites**, **Download AKS Edge Essentials**, and **Install AKS Edge Essentials** sections in [this documentation](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-howto-setup-machine).
+1. Three edge machines, each with the required OS and AKS Edge Essentials installed. Follow the **Prerequisites**, **Download AKS Edge Essentials**, and **Install AKS Edge Essentials** sections in [this documentation](https://learn.microsoft.com/en-us/azure/aks/aksarc/aks-edge-howto-setup-machine).
 1. Build the solution [modules](./modules/): **opcua**, **pipeline**, **rtspsim** and **telegraf**.
 1. If you're using your own [modules](./modules/), ensure to update the [welding-demo.yaml](./welding-demo.yaml).
 
@@ -29,7 +29,7 @@ The following steps only need to be completed on one of the three edge machines.
 
 ## Deploy an AKS Edge Essentials Scalable Cluster
 
-Find more details on deploying a scalable cluster [here](https://learn.microsoft.com/en-us/azure/aks/hybrid/aks-edge-howto-multi-node-deployment).
+Find more details on deploying a scalable cluster [here](https://learn.microsoft.com/en-us/azure/aks/aksarc/aks-edge-howto-multi-node-deployment).
 
 ### Prepare machine for deployment
 
